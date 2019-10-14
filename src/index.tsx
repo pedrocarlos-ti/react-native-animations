@@ -4,22 +4,49 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
 import Constants from 'expo-constants';
+import ReactAnimated from './components/React';
 
-const routes = ['Opacity', 'Translate', 'Scale'];
+const { width } = Dimensions.get('screen');
+
+const routes = [
+  'Opacity',
+  'Translate',
+  'Scale',
+  'WidthHeight',
+  'WidthHeightPercentage',
+  'Absolute',
+  'Color',
+  'Rotate',
+  'Easing',
+  'Spring',
+  'Event',
+  'Decay',
+  'Add',
+  'Divide',
+  'Multiply',
+  'Modulo'
+];
 
 export default class Home extends Component<{ navigation: any }> {
+  static navigationOptions = {
+    header: null
+  };
+
   render() {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.title}>React Animations by Example</Text>
+        <ReactAnimated />
         <ScrollView contentContainerStyle={styles.scrolllview}>
           {routes.map(route => (
             <TouchableOpacity
               key={route}
+              activeOpacity={0.7}
               style={styles.touch}
               onPress={() => navigation.navigate(route)}
             >
@@ -40,8 +67,9 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight
   },
   scrolllview: {
-    flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+    flexDirection: 'row'
   },
   title: {
     fontSize: 22,
@@ -55,8 +83,9 @@ const styles = StyleSheet.create({
     color: '#5959a0'
   },
   touch: {
+    width: width / 2 - 20,
     margin: 10,
-    height: 40,
+    height: 100,
     backgroundColor: '#f1f1f1',
     borderRadius: 3,
     alignItems: 'center',

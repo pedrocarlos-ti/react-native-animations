@@ -1,37 +1,32 @@
 import React, { Component } from 'react';
-
 import {
   View,
-  Animated,
   StyleSheet,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Animated
 } from 'react-native';
 import { navigationConfig } from './components/navigation';
 
-export default class Opacity extends Component {
-  static navigationOptions = navigationConfig('Opacity Example');
+export default class Absolute extends Component {
+  static navigationOptions = navigationConfig('Absolute Animation Example');
 
   state = {
-    animation: new Animated.Value(1)
+    animation: new Animated.Value(0)
   };
 
-  // Function that trigger animation with 1500ms duration and change opacity
   startAnimation = () => {
     Animated.timing(this.state.animation, {
-      toValue: 0,
-      duration: 350
-    }).start(() => {
-      Animated.timing(this.state.animation, {
-        toValue: 1,
-        duration: 350
-      }).start();
-    });
+      toValue: 40,
+      duration: 1500
+    }).start();
   };
 
   render() {
     // Add custom style to animate component
     const animatedStyle = {
-      opacity: this.state.animation
+      top: this.state.animation,
+      left: this.state.animation,
+      right: this.state.animation
     };
 
     return (
@@ -51,8 +46,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   box: {
-    width: 150,
     height: 150,
+    top: 0,
+    left: 0,
+    right: 0,
+    position: 'absolute',
     backgroundColor: 'tomato'
   }
 });

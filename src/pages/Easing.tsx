@@ -1,37 +1,41 @@
 import React, { Component } from 'react';
-
 import {
   View,
-  Animated,
   StyleSheet,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Animated,
+  Easing,
+  Dimensions
 } from 'react-native';
+
 import { navigationConfig } from './components/navigation';
 
-export default class Opacity extends Component {
-  static navigationOptions = navigationConfig('Opacity Example');
+export default class EasingAnimation extends Component {
+  static navigationOptions = navigationConfig('Easing Animation Example');
 
   state = {
-    animation: new Animated.Value(1)
+    animation: new Animated.Value(0)
   };
 
-  // Function that trigger animation with 1500ms duration and change opacity
   startAnimation = () => {
     Animated.timing(this.state.animation, {
-      toValue: 0,
-      duration: 350
-    }).start(() => {
-      Animated.timing(this.state.animation, {
-        toValue: 1,
-        duration: 350
-      }).start();
-    });
+      toValue: 200,
+      duration: 500,
+      // easing: Easing.back(5),
+      // easing: Easing.bounce
+      // easing: Easing.elastic(3)
+      easing: Easing.bezier(0.06, 0.5, 0.86, 0.26)
+    }).start();
   };
 
   render() {
     // Add custom style to animate component
     const animatedStyle = {
-      opacity: this.state.animation
+      transform: [
+        {
+          translateY: this.state.animation
+        }
+      ]
     };
 
     return (

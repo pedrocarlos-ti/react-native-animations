@@ -1,37 +1,42 @@
 import React, { Component } from 'react';
-
 import {
   View,
-  Animated,
   StyleSheet,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Animated
 } from 'react-native';
 import { navigationConfig } from './components/navigation';
 
-export default class Opacity extends Component {
-  static navigationOptions = navigationConfig('Opacity Example');
+export default class Divide extends Component {
+  static navigationOptions = navigationConfig('Divide Animation Example');
 
   state = {
     animation: new Animated.Value(1)
   };
 
-  // Function that trigger animation with 1500ms duration and change opacity
   startAnimation = () => {
     Animated.timing(this.state.animation, {
-      toValue: 0,
-      duration: 350
+      toValue: 300,
+      duration: 1500
     }).start(() => {
       Animated.timing(this.state.animation, {
-        toValue: 1,
-        duration: 350
+        toValue: 0,
+        duration: 200
       }).start();
     });
   };
 
   render() {
+    const randomValue = 2;
+    const newAnimation = Animated.divide(this.state.animation, randomValue);
+
     // Add custom style to animate component
     const animatedStyle = {
-      opacity: this.state.animation
+      transform: [
+        {
+          translateY: newAnimation
+        }
+      ]
     };
 
     return (

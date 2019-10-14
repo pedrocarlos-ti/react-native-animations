@@ -1,37 +1,50 @@
 import React, { Component } from 'react';
-
 import {
   View,
-  Animated,
   StyleSheet,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Animated
 } from 'react-native';
 import { navigationConfig } from './components/navigation';
 
-export default class Opacity extends Component {
-  static navigationOptions = navigationConfig('Opacity Example');
+export default class WidthHeightPercentage extends Component {
+  static navigationOptions = navigationConfig(
+    'Width/Height % Animation Example'
+  );
 
   state = {
-    animation: new Animated.Value(1)
+    animation: new Animated.Value(0),
+    headerTintColor: '#e9e9e9',
+    headerStyle: {
+      backgroundColor: '#5959a0'
+    },
+    headerTitleStyle: {
+      color: '#e9e9f9'
+    }
   };
 
-  // Function that trigger animation with 1500ms duration and change opacity
   startAnimation = () => {
     Animated.timing(this.state.animation, {
-      toValue: 0,
-      duration: 350
-    }).start(() => {
-      Animated.timing(this.state.animation, {
-        toValue: 1,
-        duration: 350
-      }).start();
-    });
+      toValue: 1,
+      duration: 1500
+    }).start();
   };
 
   render() {
     // Add custom style to animate component
+    const widthInterpolate = this.state.animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['10%', '75%']
+    });
+
+    const heightInterpolate = this.state.animation.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['10%', '90%']
+    });
+
     const animatedStyle = {
-      opacity: this.state.animation
+      width: widthInterpolate,
+      height: heightInterpolate
     };
 
     return (
@@ -51,8 +64,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   box: {
-    width: 150,
-    height: 150,
     backgroundColor: 'tomato'
   }
 });
