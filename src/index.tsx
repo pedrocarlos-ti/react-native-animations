@@ -28,7 +28,11 @@ const routes = [
   'Add',
   'Divide',
   'Multiply',
-  'Modulo'
+  'Modulo',
+  'Parallel',
+  'Sequence',
+  'Stagger',
+  'Delay'
 ];
 
 export default class Home extends Component<{ navigation: any }> {

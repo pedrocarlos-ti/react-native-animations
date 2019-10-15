@@ -18,6 +18,10 @@ import Add from './src/pages/Add';
 import Divide from './src/pages/Divide';
 import Multiply from './src/pages/Multiply';
 import Modulo from './src/pages/Modulo';
+import Parallel from './src/pages/Parallel';
+import Sequence from './src/pages/Sequence';
+import Stagger from './src/pages/Stagger';
+import Delay from './src/pages/Delay';
 
 const Routes = {
   Home,
@@ -36,7 +40,11 @@ const Routes = {
   Add,
   Divide,
   Multiply,
-  Modulo
+  Modulo,
+  Parallel,
+  Sequence,
+  Stagger,
+  Delay
 };
 
 const App = createAppContainer(createStackNavigator(Routes));
